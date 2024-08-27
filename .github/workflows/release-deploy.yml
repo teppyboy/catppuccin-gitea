@@ -38,11 +38,9 @@ jobs:
         uses: "googleapis/release-please-action@v4"
 
       - name: Create tarball
-        if: ${{ steps.release.outputs.release_created }}
         run: tar czf catppuccin-gitea.tar.gz --directory=./dist .
 
       - name: Upload Release Artifacts
-        if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release upload ${{ steps.release.outputs.tag_name }} ./catppuccin-gitea.tar.gz
